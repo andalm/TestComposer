@@ -5,7 +5,6 @@
  * configurar nuestra aplicacion
  */
 require 'config/config.php';
-require 'helpers.php';
 
 //Library
 require 'library/Request.php';

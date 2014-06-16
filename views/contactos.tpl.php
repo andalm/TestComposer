@@ -1,3 +1,3 @@
 
 <p>correo@correo.com</p>
-<a href="ciudad">Ciudad</a>
+<a href="/clase2PHP/contactos/ciudad">Ciudad</a>
