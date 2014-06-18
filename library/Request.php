@@ -189,15 +189,7 @@ class Request
         if ($response instanceof Response)
         {
             $response->execute();
-        }
-        elseif (is_string($response))
-        {
-            echo $response;
-        }
-        elseif(is_array($response))
-        {
-            echo json_encode($response);
-        }
+        }        
         else
         {
             exit('Respuesta no valida');
