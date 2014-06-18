@@ -13,6 +13,7 @@ require 'library/Response.php';
 require 'library/View.php';
 require 'library/JSon.php';
 require 'library/Xml.php';
+require 'library/String.php';
 
 //Llamar al controlador indicado
 

@@ -30,7 +30,7 @@ class JSon extends Response
      * 
      * @param array $data setear datos a codificar
      */
-    public function setData($data)
+    public function setData($data = array())
     {
         if(is_array($data))
         {

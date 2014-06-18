@@ -79,6 +79,15 @@ class ContactosController {
         
         return new Xml($xml);
     }
+    
+     /**
+     * 
+     * @return \String datos en formato string
+     */
+    public function stringAction()
+    {
+        return new String("Cadena de texto pasada como parametro");
+    }
 }
 
 

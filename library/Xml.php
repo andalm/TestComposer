@@ -13,7 +13,7 @@ class Xml extends Response
      * @param DOMDocument/string $xml datos a envíar en formato xml
      * @throws Exception Se lanza si los datos psados no son validos
      */
-    public function __construct($xml)
+    public function __construct($xml = '')
     {
        if($xml instanceof DOMDocument || is_string($xml))
        {
@@ -41,7 +41,7 @@ class Xml extends Response
      * @param DOMDocument/string $xml datos a envíar en formato xml
      * @throws Exception Se lanza si los datos psados no son validos
      */
-    public function setXml($xml)
+    public function setXml($xml = '')
     {
        if($xml instanceof DOMDocument || is_string($xml))
        {
