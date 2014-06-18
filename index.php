@@ -12,6 +12,7 @@ require 'library/Inflector.php';
 require 'library/Response.php';
 require 'library/View.php';
 require 'library/JSon.php';
+require 'library/Xml.php';
 
 //Llamar al controlador indicado
 
