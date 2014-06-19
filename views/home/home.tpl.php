@@ -1,7 +1,12 @@
 
 <h4><?= $titulo ?></h4>
 
-<p><a href="/clase2PHP/contactos">Contactanos</a></p>
-<p><a href="/clase2PHP/contactos/json">Respuesta en JSon</a></p>
-<p><a href="/clase2PHP/contactos/xml">Respuesta en XML</a></p>
-<p><a href="/clase2PHP/contactos/string">Respuesta en String</a></p>
+<?php 
+    echo HtmlHelper::anchorTagList([
+        'Contactanos' => '/clase2PHP/contactos',
+        'Respuesta en JSon' => '/clase2PHP/contactos/json',
+        'Respuesta en XML' => '/clase2PHP/contactos/xml',
+        'Respuesta en String' => '/clase2PHP/contactos/string',
+        'Integracion Bootstrap' => '/clase2PHP/contactos/bootstrap',
+    ], 'p')
+?>

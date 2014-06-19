@@ -7,6 +7,8 @@
 require 'config/config.php';
 
 //Library
+require 'library/HtmlHelper.php';
+require 'library/HeadView.php';
 require 'library/RequestUrl.php';
 require 'library/Request.php';
 require 'library/Inflector.php';

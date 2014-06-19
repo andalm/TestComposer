@@ -33,6 +33,12 @@ class View extends Response
     protected $folderViewController;
     
     /**
+     *
+     * @var HeadView objeto para manejo de scripts y css
+     */
+    protected $head;
+    
+    /**
      * Constructor de la clase vista
      * 
      * @param string $template nombre del archivo de vista
@@ -42,6 +48,7 @@ class View extends Response
     {
         $this->template = $template;
         $this->vars = $vars;
+        $this->head = new HeadView();
     }
 
     /**
@@ -148,18 +155,56 @@ class View extends Response
     {
         $this->folderViewController = $folderViewController;
     }
-
-        
+    
+    /**
+     * 
+     * @param string $src url de archivo js que se quiere añadir a la cabecera del 
+     * documento
+     */
+    public function addScript($src = '')
+    {
+        $this->head->addScript($src);
+    }
+    
+    /**
+     * 
+     * @param string $href url del archivo css que se quiere agregar a la cabecera 
+     * del documento
+     */
+    public function addCss($href = '')
+    {
+        $this->head->addCssLink($href);
+    }
+    
+    /**
+     * 
+     * @return HeadView obtener objeto de cabecera
+     */
+    public function getHead()
+    {
+        return $this->head;
+    }
+    
+    /**
+     * 
+     * @param HeadView $head setear objeto de cabecera
+     */
+    public function setHead(HeadView $head)
+    {
+        $this->head = $head;
+    }     
+    
     /**
      * Se ejecuta para concatenar todos los string de vistas
      */
     public function execute()
     {
         $layout = $this->getLayoutFileName();
-        $template = $this->getTemplateFileName();       
+        $template = $this->getTemplateFileName();
+        $headObject = $this->getHead();
         $vars = $this->getVars();
        
-        call_user_func(function () use ($layout, $template, $vars)
+        call_user_func(function () use ($layout, $template, $headObject, $vars)
         {
             extract($vars);
             ob_start();

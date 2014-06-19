@@ -80,13 +80,27 @@ class ContactosController {
         return new Xml($xml);
     }
     
-     /**
-     * 
-     * @return \String datos en formato string
-     */
+    /**
+    * 
+    * @return \String datos en formato string
+    */
     public function stringAction()
     {
         return new String("Cadena de texto pasada como parametro");
+    }
+    
+    /**
+     * 
+     * @return \View vista de la accion prueba de integracion con Bootstrap
+     */
+    public function bootstrapAction()
+    {
+        $view = new View('bootstrap');
+        $view->addCss("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css");
+        $view->addCss("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css");
+        $view->addScript("//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js");
+        
+        return $view;
     }
 }
 
