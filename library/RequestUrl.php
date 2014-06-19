@@ -190,7 +190,7 @@ class RequestUrl
      * @param string $url string que representa la url pasada como parametro
      * @return array segmentos de url limpios de caracteres extraños
      */
-    public static function clean($url)
+    public static function clean($url = '')
     {
         $segments = explode('/', urldecode($url));
         

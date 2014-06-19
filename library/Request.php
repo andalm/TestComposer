@@ -52,7 +52,7 @@ class Request
         $controller = new $controllerClassName();
 
         $response = call_user_func_array([$controller, $actionMethodName], $params);
-
+        
         $this->executeResponse($response);
     }
     
@@ -63,6 +63,11 @@ class Request
      */
     public function executeResponse($response)
     {
+        if($response instanceof View)
+        {
+            $response->setFolderViewController($this->requestUrl->getController());
+        }
+        
         if ($response instanceof Response)
         {
             $response->execute();

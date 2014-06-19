@@ -27,6 +27,12 @@ class View extends Response
     protected $defaultLayout = 'layout';
     
     /**
+     *
+     * @var string carpeta donde se alamcenan las vista del controlador en concreto 
+     */
+    protected $folderViewController;
+    
+    /**
      * Constructor de la clase vista
      * 
      * @param string $template nombre del archivo de vista
@@ -69,7 +75,9 @@ class View extends Response
      */
     public function getTemplateFileName()
     {
-        return "views/" . Inflector::lowerCamel($this->template) . ".tpl.php";
+        return "views/" . 
+               Inflector::lowerCamel($this->folderViewController) . "/" . 
+               Inflector::lowerCamel($this->template) . ".tpl.php";
     }
     
     /**
@@ -132,14 +140,25 @@ class View extends Response
     }
     
     /**
+     * 
+     * @param string $folderViewController nombre del contrlador en donde se 
+     * encuentran los templates
+     */
+    public function setFolderViewController($folderViewController = '')
+    {
+        $this->folderViewController = $folderViewController;
+    }
+
+        
+    /**
      * Se ejecuta para concatenar todos los string de vistas
      */
     public function execute()
     {
         $layout = $this->getLayoutFileName();
-        $template = $this->getTemplateFileName();
+        $template = $this->getTemplateFileName();       
         $vars = $this->getVars();
-        
+       
         call_user_func(function () use ($layout, $template, $vars)
         {
             extract($vars);
