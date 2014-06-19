@@ -10,7 +10,7 @@
 
 <hr>
 
-Copyright, ponies
+Copyright, Andrés ;)
 
 </body>
 </html>

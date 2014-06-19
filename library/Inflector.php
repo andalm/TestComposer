@@ -12,7 +12,7 @@ class Inflector {
         $segments = explode('-', $value);
 
         array_walk($segments, function (&$item) {
-            $item = ucfirst($item);
+            $item = ucfirst(strtolower($item));
         });
 
         return implode('', $segments);

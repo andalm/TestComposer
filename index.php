@@ -7,6 +7,7 @@
 require 'config/config.php';
 
 //Library
+require 'library/RequestUrl.php';
 require 'library/Request.php';
 require 'library/Inflector.php';
 require 'library/Response.php';
@@ -16,15 +17,7 @@ require 'library/Xml.php';
 require 'library/String.php';
 
 //Llamar al controlador indicado
-
-if (empty($_GET['url']))
-{
-    $url = "";
-}
-else
-{
-    $url = $_GET['url'];
-}
-
-$request = new Request($url);
+$requestUrl = new RequestUrl($_GET['url']);
+$request = new Request($requestUrl);
 $request->execute();
+
