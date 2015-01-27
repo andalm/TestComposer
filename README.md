@@ -1,4 +1,4 @@
-clasePHP
-========
+TestComposer
+============
 
-Clase de PHP - POO, realización de un mini framework con el patrón de arquitectura MVC.
+This is an example for the use Composer on our poject
