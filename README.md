@@ -1,4 +1,4 @@
 TestComposer
 ============
 
-This is an example for the use Composer on our poject
+This is an example for the use Composer in our poject

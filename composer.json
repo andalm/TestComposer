@@ -1,0 +1,19 @@
+{
+  "require": {
+    "propel/propel": "2.0.0-alpha4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.4.5"
+  },
+  "autoload": {
+    "classmap": [
+      "app/library",
+      "app/controllers"
+    ]
+  },
+  "autoload-dev": {
+    "classmap": [
+      "app/test"
+    ]
+  }
+}

@@ -1,25 +1,9 @@
 <?php
 
-/*
- * El frontend controller se encarga de
- * configurar nuestra aplicacion
- */
-require 'config/config.php';
+require_once __DIR__.'/vendor/autoload.php';
 
-//Library
-require 'library/HtmlHelper.php';
-require 'library/HeadView.php';
-require 'library/RequestUrl.php';
-require 'library/Request.php';
-require 'library/Inflector.php';
-require 'library/Response.php';
-require 'library/View.php';
-require 'library/JSon.php';
-require 'library/Xml.php';
-require 'library/String.php';
+use App\Controllers\ContactosController;
 
-//Llamar al controlador indicado
-$requestUrl = new RequestUrl($_GET['url']);
-$request = new Request($requestUrl);
-$request->execute();
+$con = new ContactosController();
+$con->test();
 

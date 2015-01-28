@@ -1,2 +1,3 @@
-/nbproject/private/
-/config/*.php
+/app/config/*.php
+/vendor/
+composer.lock
