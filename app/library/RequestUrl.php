@@ -4,43 +4,44 @@ class RequestUrl
 {
     /**
      *
-     * @var string Url de la peticion
+     * @var {string} Url generated for call a controller and an action 
      */
     protected $url;
     
     /**
      *
-     * @var string nombre del controlador seleccionado  
+     * @var {string} name of the controller selected
      */
     protected $controller;
     
     /**
      *
-     * @var string nombre del controlador por defecto
+     * @var {string} name of the controller default
      */
     protected $defaultController = 'home';
     
     /**
      *
-     * @var string nombre de la accion seleccionada
+     * @var {string} name of the action selected
      */
     protected $action;
     
     /**
      *
-     * @var string nombre de la accion por defecto 
+     * @var {string} name of the action default
      */
     protected $defaultAction = 'index';
     
     /**
      *
-     * @var array parametros pasados a la accion seleccionada
+     * @var {array} parameters passed to action
      */
     protected $params = array();
     
     /**
-     * 
-     * @param string $url pasada al constructor de la clase request
+     * Class constructor, initializes the variable url
+     *
+     * @param {string} $url
      */
     public function __construct($url = '')
     {
@@ -57,9 +58,9 @@ class RequestUrl
     }
     
     /**
-     * Asigna el nombre del contralador seleccinado
+     * Assign the name of the selected controller
      * 
-     * @param array $segments url segmentada
+     * @param {array} $segments segmented url
      */
     public function resolveController(&$segments)
     {
@@ -72,9 +73,9 @@ class RequestUrl
     }
     
     /**
-     * Asigna el nombre de la accion seleccinada
+     * Assign the name of the selected action
      * 
-     * @param array $segments url segmentada
+     * @param {array} $segments segmented url
      */
     public function resolveAction(&$segments)
     {
@@ -87,9 +88,9 @@ class RequestUrl
     }
     
     /**
-     * Asigna los paramentros pasador por la url
+     * Assign of the parameters passed to url
      * 
-     * @param array $segments url segemenetada
+     * @param {array} $segments segmented url
      */
     public function resolveParams(&$segments)
     {
@@ -98,13 +99,17 @@ class RequestUrl
 
     /**
      * 
-     * @return string $url retorna la url
+     * @return {string} $url
      */
     public function getUrl()
     {
         return $this->url;
     }
     
+    /**
+     * 
+     * @param {string} $url
+     */
     public function setUrl($url = '')
     {
         if(is_string($url))
@@ -121,7 +126,7 @@ class RequestUrl
     
     /**
      * 
-     * @return string retorna el nombre del controlador 
+     * @return {string} controller name of the controller
      */
     public function getController()
     {
