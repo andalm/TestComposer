@@ -2,8 +2,10 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-use App\Controllers\ContactosController;
+use App\Library\RequestUrl;
+use App\Library\Request;
 
-$con = new ContactosController();
-$con->test();
+$requestUrl = new RequestUrl($_GET['url']);
+$request = new Request($requestUrl);
+$request->execute();
 

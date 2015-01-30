@@ -4,60 +4,57 @@ class Request
 {
     /**
      *
-     * @var RequestUrl Objeto que analiza la url 
+     * @var {RequestUrl} Object functionality the url handler
      */
     protected $requestUrl;
     
     public function __construct($requestUrl = NULL)
     {
-       $this->requestUrl = $requestUrl;
+      $this->requestUrl = $requestUrl;
     }
     
     /**
      * 
-     * @return RequestUrl obtener objeto para manejo de urls
+     * @return {RequestUrl} Get this object instantiated within this class
      */
     public function getRequestUrl()
     {
-        return $this->requestUrl;
+      return $this->requestUrl;
     }
     
     /**
      * 
-     * @param RequestUrl $requestUrl setear el objeto para manejo de urls
+     * @param {RequestUrl} $requestUrl setear el objeto para manejo de urls
      */
     public function setRequestUrl($requestUrl = NULL)
     {
-        $this->requestUrl = $requestUrl;
+      $this->requestUrl = $requestUrl;
     }
 
         
     /**
-     * Ejecuta el controlador y la accion seleccionados 
+     * This method execute the controller and action selected for parameters passed through the url
      */
     public function execute()
     {
-        $controllerClassName = $this->requestUrl->getControllerClassName();
-        $controllerFileName  = $this->requestUrl->getControllerFileName();
-        $actionMethodName    = $this->requestUrl->getActionMethodName();
-        $params              = $this->requestUrl->getParams();
-        
-        if ( ! file_exists($controllerFileName))
-        {
-            exit('controlador no existe');
-        }
+      $nameSpaceClass      = $this->requestUrl->getNameSpace();
+      $actionMethodName    = $this->requestUrl->getActionMethodName();
+      $params              = $this->requestUrl->getParams();
+      
+      if (!class_exists($nameSpaceClass))
+      {
+        exit('Controller not found');
+      }
 
-        require $controllerFileName;
+      $controller = new $nameSpaceClass();
 
-        $controller = new $controllerClassName();
-
-        $response = call_user_func_array([$controller, $actionMethodName], $params);
-        
-        $this->executeResponse($response);
+      $response = call_user_func_array([$controller, $actionMethodName], $params);
+      
+      $this->executeResponse($response);
     }
     
     /**
-     * Ejecuta el tipo de respuesta al usuario
+     * Execute any response to front-end, solely instances for the Response class
      * 
      * @param Response $response
      */
@@ -74,7 +71,7 @@ class Request
         }        
         else
         {
-            exit('Respuesta no valida');
+            exit('Response is not valid');
         }
     }
 

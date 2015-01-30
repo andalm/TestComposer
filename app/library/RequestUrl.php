@@ -4,200 +4,209 @@ class RequestUrl
 {
     /**
      *
-     * @var string Url de la peticion
+     * @var {string} Url generated for call a controller and an action 
      */
     protected $url;
     
     /**
+     * @var {string} It's a initial part of the namespace
+     */
+    protected $baseNameSpace = "App\Controllers";
+    
+    /**
      *
-     * @var string nombre del controlador seleccionado  
+     * @var {string} name of the controller selected
      */
     protected $controller;
     
     /**
      *
-     * @var string nombre del controlador por defecto
+     * @var {string} name of the controller default
      */
     protected $defaultController = 'home';
     
     /**
      *
-     * @var string nombre de la accion seleccionada
+     * @var {string} name of the action selected
      */
     protected $action;
     
     /**
      *
-     * @var string nombre de la accion por defecto 
+     * @var {string} name of the action default
      */
     protected $defaultAction = 'index';
     
     /**
      *
-     * @var array parametros pasados a la accion seleccionada
+     * @var {array} parameters passed to action
      */
     protected $params = array();
     
     /**
-     * 
-     * @param string $url pasada al constructor de la clase request
+     * Class constructor, initializes the variable url
+     *
+     * @param {string} $url
      */
     public function __construct($url = '')
     {
-        if(is_string($url))
-        {
-            $this->url = $url;
-        }
-        else
-        {
-            $this->url = '';
-        }
-        
-        $this->resolveSegments();
+      if(is_string($url))
+      {
+        $this->url = $url;
+      }
+      else
+      {
+        $this->url = '';
+      }
+      
+      $this->resolveSegments();
     }
     
     /**
-     * Asigna el nombre del contralador seleccinado
+     * Assign the name of the selected controller
      * 
-     * @param array $segments url segmentada
+     * @param {array} $segments segmented url
      */
     public function resolveController(&$segments)
     {
-        $this->controller = array_shift($segments);
+      $this->controller = array_shift($segments);
 
-        if (empty($this->controller))
-        {
-            $this->controller = $this->defaultController;
-        }
+      if (empty($this->controller))
+      {
+        $this->controller = $this->defaultController;
+      }
     }
     
     /**
-     * Asigna el nombre de la accion seleccinada
+     * Assign the name of the selected action
      * 
-     * @param array $segments url segmentada
+     * @param {array} $segments segmented url
      */
     public function resolveAction(&$segments)
     {
-        $this->action = array_shift($segments);
+      $this->action = array_shift($segments);
 
-        if (empty($this->action))
-        {
-            $this->action = $this->defaultAction;
-        }
+      if (empty($this->action))
+      {
+        $this->action = $this->defaultAction;
+      }
     }
     
     /**
-     * Asigna los paramentros pasador por la url
+     * Assign of the parameters passed to url
      * 
-     * @param array $segments url segemenetada
+     * @param {array} $segments segmented url
      */
     public function resolveParams(&$segments)
     {
-        $this->params = $segments;
+      $this->params = $segments;
     }
 
     /**
      * 
-     * @return string $url retorna la url
+     * @return {string} $url
      */
     public function getUrl()
     {
-        return $this->url;
-    }
-    
-    public function setUrl($url = '')
-    {
-        if(is_string($url))
-        {            
-            $this->url = $url;
-        }
-        else
-        {
-            $this->url = '';
-        }
-        
-        $this->resolveSegments();
+      return $this->url;
     }
     
     /**
      * 
-     * @return string retorna el nombre del controlador 
+     * @param {string} $url
+     */
+    public function setUrl($url = '')
+    {
+      if(is_string($url))
+      {            
+        $this->url = $url;
+      }
+      else
+      {
+        $this->url = '';
+      }
+      
+      $this->resolveSegments();
+    }
+    
+    /**
+     * 
+     * @return {string} controller name of the controller
      */
     public function getController()
     {
-        return $this->controller;
+      return $this->controller;
     }
     
     /**
      * 
-     * @return string Devuelve el nombre de la clase con formato del estsandar
+     * @return {string} Return the class name in camel case
      */
     public function getControllerClassName()
     {
-        return Inflector::camel($this->getController()) . 'Controller';
+      return Inflector::camel($this->getController()) . 'Controller';
     }
     
     /**
      * 
-     * @return string Devuelve el nombre del archivo que contiene la clase 
+     * @return {string} Return the class file path
      */
-    public function getControllerFileName()
+    public function getNameSpace()
     {
-        return 'controllers/' . $this->getControllerClassName() . '.php';
+      return $this->baseNameSpace . "\\" .$this->getControllerClassName();
     }
     
     /**
      * 
-     * @return string devuelve el nombre de la accion seleccionada
+     * @return {string} Return the name of the selected action 
      */
     public function getAction()
     {
-        return $this->action;
+      return $this->action;
     }
     
     /**
      * 
-     * @return string devuelve el nombre de la accion seleccionada con el formato
-     * standar
+     * @return {string} return action name in lower camel
      */
     public function getActionMethodName()
     {
-        return Inflector::lowerCamel($this->getAction()) . 'Action';
+      return Inflector::lowerCamel($this->getAction()) . 'Action';
     }
     
     /**
      * 
-     * @return array retorna los parametros pasados por url
+     * @return {array} return all variables passed for the url
      */
     public function getParams()
     {
-        return $this->params;
+      return $this->params;
     }
     
     /**
-     * Asigna los segmentos de la url a su respectiva propiedad de la clase
+     * Clean and set the url segments at the class properties
      */
     protected function resolveSegments()
     {
-        $segments = self::clean($this->getUrl());
-        $this->resolveController($segments);
-        $this->resolveAction($segments);
-        $this->resolveParams($segments);
+      $segments = self::clean($this->getUrl());
+      $this->resolveController($segments);
+      $this->resolveAction($segments);
+      $this->resolveParams($segments);
     }
     
     /**
      * 
-     * @param string $url string que representa la url pasada como parametro
-     * @return array segmentos de url limpios de caracteres extraños
+     * @param {string} $url
+     * @return {array} clean url segments
      */
     public static function clean($url = '')
     {
-        $segments = explode('/', urldecode($url));
-        
-        array_walk($segments, function (&$item) {
-            $item = preg_replace('/[^\w\.@-]/', '$1', $item);
-        });
-        
-        return $segments;
+      $segments = explode('/', urldecode($url));
+      
+      array_walk($segments, function (&$item) {
+        $item = preg_replace('/[^\w\.@-]/', '$1', $item);
+      });
+      
+      return $segments;
     }
 }
