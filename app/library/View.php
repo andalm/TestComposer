@@ -82,7 +82,7 @@ class View extends Response
      */
     public function getTemplateFileName()
     {
-        return "views/" . 
+        return $this->pathApp . "/views/".
                Inflector::lowerCamel($this->folderViewController) . "/" . 
                Inflector::lowerCamel($this->template) . ".tpl.php";
     }
@@ -143,7 +143,7 @@ class View extends Response
     {
         $this->resolveLayout();
         
-        return "views/" . Inflector::lowerCamel($this->layout) . ".tpl.php";
+        return $this->pathApp . "/views/" . Inflector::lowerCamel($this->layout) . ".tpl.php";
     }
     
     /**
@@ -199,19 +199,19 @@ class View extends Response
      */
     public function execute()
     {
-        $layout = $this->getLayoutFileName();
-        $template = $this->getTemplateFileName();
-        $headObject = $this->getHead();
-        $vars = $this->getVars();
-       
-        call_user_func(function () use ($layout, $template, $headObject, $vars)
-        {
-            extract($vars);
-            ob_start();
-            require $template;
-            $tpl_content = ob_get_clean();
-            require $layout;
-        });
+      $layout = $this->getLayoutFileName();
+      $template = $this->getTemplateFileName();
+      $headObject = $this->getHead();
+      $vars = $this->getVars();
+      
+      call_user_func(function () use ($layout, $template, $headObject, $vars)
+      {     
+        extract($vars);
+        ob_start();
+        require $template;
+        $tpl_content = ob_get_clean();
+        require $layout;
+      });
     }
 
 }

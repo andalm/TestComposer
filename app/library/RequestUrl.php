@@ -9,6 +9,11 @@ class RequestUrl
     protected $url;
     
     /**
+     * @var {string} It's a initial part of the namespace
+     */
+    protected $baseNameSpace = "App\Controllers";
+    
+    /**
      *
      * @var {string} name of the controller selected
      */
@@ -45,16 +50,16 @@ class RequestUrl
      */
     public function __construct($url = '')
     {
-        if(is_string($url))
-        {
-            $this->url = $url;
-        }
-        else
-        {
-            $this->url = '';
-        }
-        
-        $this->resolveSegments();
+      if(is_string($url))
+      {
+        $this->url = $url;
+      }
+      else
+      {
+        $this->url = '';
+      }
+      
+      $this->resolveSegments();
     }
     
     /**
@@ -64,12 +69,12 @@ class RequestUrl
      */
     public function resolveController(&$segments)
     {
-        $this->controller = array_shift($segments);
+      $this->controller = array_shift($segments);
 
-        if (empty($this->controller))
-        {
-            $this->controller = $this->defaultController;
-        }
+      if (empty($this->controller))
+      {
+        $this->controller = $this->defaultController;
+      }
     }
     
     /**
@@ -79,12 +84,12 @@ class RequestUrl
      */
     public function resolveAction(&$segments)
     {
-        $this->action = array_shift($segments);
+      $this->action = array_shift($segments);
 
-        if (empty($this->action))
-        {
-            $this->action = $this->defaultAction;
-        }
+      if (empty($this->action))
+      {
+        $this->action = $this->defaultAction;
+      }
     }
     
     /**
@@ -94,7 +99,7 @@ class RequestUrl
      */
     public function resolveParams(&$segments)
     {
-        $this->params = $segments;
+      $this->params = $segments;
     }
 
     /**
@@ -103,7 +108,7 @@ class RequestUrl
      */
     public function getUrl()
     {
-        return $this->url;
+      return $this->url;
     }
     
     /**
@@ -112,16 +117,16 @@ class RequestUrl
      */
     public function setUrl($url = '')
     {
-        if(is_string($url))
-        {            
-            $this->url = $url;
-        }
-        else
-        {
-            $this->url = '';
-        }
-        
-        $this->resolveSegments();
+      if(is_string($url))
+      {            
+        $this->url = $url;
+      }
+      else
+      {
+        $this->url = '';
+      }
+      
+      $this->resolveSegments();
     }
     
     /**
@@ -130,79 +135,78 @@ class RequestUrl
      */
     public function getController()
     {
-        return $this->controller;
+      return $this->controller;
     }
     
     /**
      * 
-     * @return string Devuelve el nombre de la clase con formato del estsandar
+     * @return {string} Return the class name in camel case
      */
     public function getControllerClassName()
     {
-        return Inflector::camel($this->getController()) . 'Controller';
+      return Inflector::camel($this->getController()) . 'Controller';
     }
     
     /**
      * 
-     * @return string Devuelve el nombre del archivo que contiene la clase 
+     * @return {string} Return the class file path
      */
-    public function getControllerFileName()
+    public function getNameSpace()
     {
-        return 'controllers/' . $this->getControllerClassName() . '.php';
+      return $this->baseNameSpace . "\\" .$this->getControllerClassName();
     }
     
     /**
      * 
-     * @return string devuelve el nombre de la accion seleccionada
+     * @return {string} Return the name of the selected action 
      */
     public function getAction()
     {
-        return $this->action;
+      return $this->action;
     }
     
     /**
      * 
-     * @return string devuelve el nombre de la accion seleccionada con el formato
-     * standar
+     * @return {string} return action name in lower camel
      */
     public function getActionMethodName()
     {
-        return Inflector::lowerCamel($this->getAction()) . 'Action';
+      return Inflector::lowerCamel($this->getAction()) . 'Action';
     }
     
     /**
      * 
-     * @return array retorna los parametros pasados por url
+     * @return {array} return all variables passed for the url
      */
     public function getParams()
     {
-        return $this->params;
+      return $this->params;
     }
     
     /**
-     * Asigna los segmentos de la url a su respectiva propiedad de la clase
+     * Clean and set the url segments at the class properties
      */
     protected function resolveSegments()
     {
-        $segments = self::clean($this->getUrl());
-        $this->resolveController($segments);
-        $this->resolveAction($segments);
-        $this->resolveParams($segments);
+      $segments = self::clean($this->getUrl());
+      $this->resolveController($segments);
+      $this->resolveAction($segments);
+      $this->resolveParams($segments);
     }
     
     /**
      * 
-     * @param string $url string que representa la url pasada como parametro
-     * @return array segmentos de url limpios de caracteres extraños
+     * @param {string} $url
+     * @return {array} clean url segments
      */
     public static function clean($url = '')
     {
-        $segments = explode('/', urldecode($url));
-        
-        array_walk($segments, function (&$item) {
-            $item = preg_replace('/[^\w\.@-]/', '$1', $item);
-        });
-        
-        return $segments;
+      $segments = explode('/', urldecode($url));
+      
+      array_walk($segments, function (&$item) {
+        $item = preg_replace('/[^\w\.@-]/', '$1', $item);
+      });
+      
+      return $segments;
     }
 }

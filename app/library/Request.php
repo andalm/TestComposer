@@ -10,7 +10,7 @@ class Request
     
     public function __construct($requestUrl = NULL)
     {
-       $this->requestUrl = $requestUrl;
+      $this->requestUrl = $requestUrl;
     }
     
     /**
@@ -19,7 +19,7 @@ class Request
      */
     public function getRequestUrl()
     {
-        return $this->requestUrl;
+      return $this->requestUrl;
     }
     
     /**
@@ -28,7 +28,7 @@ class Request
      */
     public function setRequestUrl($requestUrl = NULL)
     {
-        $this->requestUrl = $requestUrl;
+      $this->requestUrl = $requestUrl;
     }
 
         
@@ -37,23 +37,20 @@ class Request
      */
     public function execute()
     {
-        $controllerClassName = $this->requestUrl->getControllerClassName();
-        $controllerFileName  = $this->requestUrl->getControllerFileName();
-        $actionMethodName    = $this->requestUrl->getActionMethodName();
-        $params              = $this->requestUrl->getParams();
-        
-        if ( ! file_exists($controllerFileName))
-        {
-            exit('controlador no existe');
-        }
+      $nameSpaceClass      = $this->requestUrl->getNameSpace();
+      $actionMethodName    = $this->requestUrl->getActionMethodName();
+      $params              = $this->requestUrl->getParams();
+      
+      if (!class_exists($nameSpaceClass))
+      {
+        exit('Controller not found');
+      }
 
-        require $controllerFileName;
+      $controller = new $nameSpaceClass();
 
-        $controller = new $controllerClassName();
-
-        $response = call_user_func_array([$controller, $actionMethodName], $params);
-        
-        $this->executeResponse($response);
+      $response = call_user_func_array([$controller, $actionMethodName], $params);
+      
+      $this->executeResponse($response);
     }
     
     /**
@@ -74,7 +71,7 @@ class Request
         }        
         else
         {
-            exit('Respuesta no valida');
+            exit('Response is not valid');
         }
     }
 
