@@ -4,7 +4,7 @@ class Request
 {
     /**
      *
-     * @var RequestUrl Objeto que analiza la url 
+     * @var {RequestUrl} Object functionality the url handler
      */
     protected $requestUrl;
     
@@ -15,7 +15,7 @@ class Request
     
     /**
      * 
-     * @return RequestUrl obtener objeto para manejo de urls
+     * @return {RequestUrl} Get this object instantiated within this class
      */
     public function getRequestUrl()
     {
@@ -24,7 +24,7 @@ class Request
     
     /**
      * 
-     * @param RequestUrl $requestUrl setear el objeto para manejo de urls
+     * @param {RequestUrl} $requestUrl setear el objeto para manejo de urls
      */
     public function setRequestUrl($requestUrl = NULL)
     {
@@ -33,7 +33,7 @@ class Request
 
         
     /**
-     * Ejecuta el controlador y la accion seleccionados 
+     * This method execute the controller and action selected for parameters passed through the url
      */
     public function execute()
     {
@@ -54,7 +54,7 @@ class Request
     }
     
     /**
-     * Ejecuta el tipo de respuesta al usuario
+     * Execute any response to front-end, solely instances for the Response class
      * 
      * @param Response $response
      */

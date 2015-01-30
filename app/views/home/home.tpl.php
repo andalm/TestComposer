@@ -1,5 +1,5 @@
 
-<h4><?= $titulo ?></h4>
+<h4><?= $title ?></h4>
 
 <?php
     echo App\Library\HtmlHelper::anchorTagList([
