@@ -1,9 +1,5 @@
 <?php namespace App\Library;
 
-abstract class Response {
-  
-  protected $pathApp = __DIR__ . "/..";
-  
+abstract class Response {  
   abstract public function execute();
-
 }

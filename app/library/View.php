@@ -1,7 +1,15 @@
 <?php namespace App\Library;
 
+use duncan3dc\Laravel\Blade;
+    
 class View extends Response
 {
+  /**
+   *
+   * @var {string} path of the views our project
+   */
+  protected $pathViews = __DIR__ . "/../views/";
+  
   /**
    *
    * @var {string} name of the view selected
@@ -13,18 +21,6 @@ class View extends Response
    * @var {array} parameters that going to pass the view
    */
   protected $vars = array();
-  
-  /**
-   *
-   * @var {string} layout selectd 
-   */
-  protected $layout; 
-  
-  /**
-   *
-   * @var {string} default layout
-   */
-  protected $defaultLayout = 'layout';
   
   /**
    *
@@ -80,11 +76,10 @@ class View extends Response
    * 
    * @return {string} retorna Return full path of the view selected
    */
-  public function getTemplateFileName()
+  public function getFolderTemplate()
   {
-    return $this->pathApp . "/views/".
-           Inflector::lowerCamel($this->folderViewController) . "/" . 
-           Inflector::lowerCamel($this->template) . ".tpl.php";
+    return $this->pathViews .
+           Inflector::lowerCamel($this->folderViewController) . "/";
   }
   
   /**
@@ -95,57 +90,7 @@ class View extends Response
   {
     $this->vars = $vars;
   }
-  
-  /**
-   * 
-   * @return {string} Get layout selected
-   */
-  public function getLayout()
-  {
-    return $this->layout;
-  }
-  
-  /**
-   * 
-   * @return {string} Get default layout
-   */
-  public function getDefaultLayout()
-  {
-    return $this->defaultLayout;
-  }
-  
-  
-  /**
-   * 
-   * @param {string} $layout Set layout
-   */
-  public function setLayout($layout)
-  {
-    $this->layout = $layout;
-  }
-  
-  /**
-   * Set default layout, if the layout property is empty
-   */
-  public function resolveLayout()
-  {
-    if(empty($this->layout))
-    {
-      $this->layout = $this->defaultLayout;
-    }
-  }
-  
- /**
-  * 
-  * @return {string} return full path of the layout selected
-  */
-  public function getLayoutFileName()
-  {
-    $this->resolveLayout();
     
-    return $this->pathApp . "/views/" . Inflector::lowerCamel($this->layout) . ".tpl.php";
-  }
-  
   /**
    * 
    * @param {string} $folderViewController name of the folder, this contains all views of the
@@ -197,18 +142,18 @@ class View extends Response
    */
   public function execute()
   {
-    $layout = $this->getLayoutFileName();
-    $template = $this->getTemplateFileName();
-    $headObject = $this->getHead();
-    $vars = $this->getVars();
+    $views          = $this->pathViews;
+    $folderTemplate = $this->getFolderTemplate();
+    $template       = $this->template;
+    $headObject     = $this->getHead();
+    $vars           = $this->getVars();
     
-    call_user_func(function () use ($layout, $template, $headObject, $vars)
-    {     
-      extract($vars);
-      ob_start();
-      require $template;
-      $tpl_content = ob_get_clean();
-      require $layout;
+    call_user_func(function () use ($views, $folderTemplate, $template, $headObject, $vars)
+    {
+      Blade::addPath($views);
+      Blade::addPath($folderTemplate);
+      $vars["headObject"] = $headObject;
+      echo Blade::make($template, $vars)->render();
     });
   }
 
