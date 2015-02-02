@@ -26,7 +26,7 @@ class HeadView
         }
         else
         {
-            throw new Exception("Datos Invalidos!!");
+            throw new Exception("Invalid param");
         }
     }
     
@@ -43,7 +43,7 @@ class HeadView
         }
         else
         {
-            throw new Exception("Datos Invalidos!!");
+            throw new Exception("Invalid param");
         }
     }
     

@@ -16,8 +16,8 @@
   stopOnSkipped="false"
 >
   <testsuites>
-    <testsuite name="Tests">
-      <directory phpVersion="5.3.0" phpVersionOperator=">=">app/test</directory>
+    <testsuite name="Controllers">
+      <directory phpVersion="5.3.0" phpVersionOperator=">=">app/test/controllers</directory>
     </testsuite>
   </testsuites>
 </phpunit>
