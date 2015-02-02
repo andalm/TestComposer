@@ -28,15 +28,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-  <body>
-  
-    <nav class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">          
-          <a class="navbar-brand" href="/">Test Composer</a>
-        </div>       
-      </div>
-    </nav>
+  <body>    
+    @include('nav')
     
     <div class="container">     
       <div class="row row-offcanvas row-offcanvas-right">
@@ -44,19 +37,12 @@
           @yield('content')
         </div>      
       
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group">
-            <a href="/" class="list-group-item active">Home</a>
-            <a href="/test/" class="list-group-item">Test</a>
-          </div>
-        </div>
+        @include('sidebar')
       </div>
       
       <hr>
       
-      <footer>
-        <p> Copyright, Andrés ;)</p>
-      </footer>       
+      @include('footer')
     </div>
   </body>
 </html>

@@ -1,0 +1,5 @@
+<?php $__env->startSection('footer'); ?>
+  <footer>
+    <p> Copyright, Andrés ;)</p>
+  </footer>
+<?php echo $__env->yieldSection(); ?>
