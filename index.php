@@ -6,19 +6,20 @@ use App\Library\RequestUrl;
 use App\Library\Request;
 use Propel\Runtime\Propel;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
-use App\Models\Brand;
-
 $serviceContainer = Propel::getServiceContainer();
-$serviceContainer->setAdapterClass('bookstore', 'mysql');
+$serviceContainer->setAdapterClass('test_composer', 'mysql');
 $manager = new ConnectionManagerSingle();
 $manager->setConfiguration(array (
   'dsn'      => 'mysql:host=localhost;dbname=test_composer',
   'user'     => '',
   'password' => '',
 ));
-$serviceContainer->setConnectionManager('default', $manager);
+$serviceContainer->setConnectionManager('test_composer', $manager);
 
-echo $brand->getFirstName(); // 'Jane'
+$brands = ClothesQuery::create()->find();
+foreach($brands as $brand){
+  echo $brand . "<br>";
+}
 
 $requestUrl = new RequestUrl($_GET['url']);
 $request = new Request($requestUrl);

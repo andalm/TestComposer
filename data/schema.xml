@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+<database name="test_composer" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
   <table name="brand" idMethod="native" phpName="Brand">
     <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
