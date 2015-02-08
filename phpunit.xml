@@ -17,7 +17,13 @@
 >
   <testsuites>
     <testsuite name="Controllers">
-      <directory phpVersion="5.3.0" phpVersionOperator=">=">app/test/controllers</directory>
+      <directory>app/test/controllers</directory>
+    </testsuite>
+  </testsuites>
+  
+  <testsuites>
+    <testsuite name="Models">
+      <directory>app/test/mdoels</directory>
     </testsuite>
   </testsuites>
 </phpunit>
