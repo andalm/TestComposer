@@ -9,7 +9,8 @@
   "autoload": {
     "classmap": [
       "app/library",
-      "app/controllers"
+      "app/controllers",
+      "app/models"
     ]
   },
   "autoload-dev": {

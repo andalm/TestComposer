@@ -6,6 +6,14 @@ class TestController {
 
   public function indexAction()
   {
+    /**
+     $clothesBrand = ClothesBrandQuery::create()->find();
+     //$clothess->populateRelation('ClothesBrand')->populateRelation('Brand');
+    foreach($clothesBrand as $cb)
+    {
+      echo $cb->getClothes()->getName() ." - ". $cb->getBrand()->getName() . "<br><br>";
+    }
+    */
     $view = new View('index');    
     $view->addCss("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css");
     $view->addCss("//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css");
