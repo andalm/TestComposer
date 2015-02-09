@@ -19,11 +19,9 @@
     <testsuite name="Controllers">
       <directory>app/test/controllers</directory>
     </testsuite>
-  </testsuites>
-  
-  <testsuites>
+    
     <testsuite name="Models">
-      <directory>app/test/mdoels</directory>
+      <directory>app/test/models</directory>
     </testsuite>
   </testsuites>
 </phpunit>
