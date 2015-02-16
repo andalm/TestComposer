@@ -8,6 +8,8 @@ class DataBase {
   private static $serviceContainer = null;
   private static $manager = null;
 
+  private function __construct(){}
+
   public static function initialize()
   {
     if(self::$serviceContainer == null && self::$manager == null)
