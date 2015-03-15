@@ -16,7 +16,10 @@ class DataBase {
     {
       $config = require_once __DIR__ . "/../config/config.php";
       self::$serviceContainer = Propel::getServiceContainer();
-      self::$serviceContainer->setAdapterClass($config['database']['connection']['db'], $config['database']['connection']['adapter']);
+      self::$serviceContainer->setAdapterClass(
+        $config['database']['connection']['db'],
+        $config['database']['connection']['adapter']
+      );
       self::$manager = new ConnectionManagerSingle();
       self::$manager->setConfiguration(array (
         'dsn'      => 'mysql:host='.$config['database']['connection']['host'].';dbname='.$config['database']['connection']['db'],
@@ -24,6 +27,6 @@ class DataBase {
         'password' => $config['database']['connection']['password'],
       ));
       self::$serviceContainer->setConnectionManager($config['database']['connection']['db'], self::$manager);
-    }    
+    }
   }
 }
