@@ -15,4 +15,41 @@ use Base\ClothesBrandQuery as BaseClothesBrandQuery;
 class ClothesBrandQuery extends BaseClothesBrandQuery
 {
 
-} // ClothesBrandQuery
+  /**
+   * This function return the string with replaced matches
+   * @param  string $input Text passed in the input of the form
+   * @return string String with replaced matches
+   */
+  public function searchBrandsOrClothing($input)
+  {
+    if(!is_string($input))
+      throw new Exception("The paramater must be a string.");
+
+    //Convert special characters to HTML entities and Quote string
+    $input = htmlspecialchars(addslashes($input));
+    $brands   = \BrandQuery::create()->orderByName()->find();
+    $clothing = \ClothesQuery::create()->orderByName()->find();
+
+    //Replaced brands to <b>brand</b>
+    foreach($brands as $brand)
+    {
+      $input = preg_replace(
+        '/((?=^)|\s{1})('.$brand->getName().')((?=$)|\s{1})/i',
+        '$1<b>$2</b>$3',
+        $input
+      );
+    }
+
+    //Replaced clothing to <i>clothing</i>
+    foreach($clothing as $clothes)
+    {
+      $input = preg_replace(
+        '/((?=^)|\s{1})('.$clothes->getName().')((?=$)|\s{1})/i',
+        '$1<i>$2</i>$3',
+        $input
+      );
+    }
+
+    return $input;
+  }
+}
