@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="TestComposer">
+<html lang="en" ng-app="TestComposer">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

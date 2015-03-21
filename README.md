@@ -4,6 +4,8 @@ This is an example for the use Composer in our project, is a personal project.
 
 This test consisting of search words that contains clothing and brands. These words if contains clothes should be with cursive and if contains brand should be with bold, the other words must stay equal.
 
+**Important Note:** For this project works, you must configure a virtual host. See this documentation [Setting Up Virtual Hosts](http://sawmac.com/xampp/virtualhosts/)
+
 ## To Run Tests
 
 All tests were make via PHPUnit
