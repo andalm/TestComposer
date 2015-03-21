@@ -17,7 +17,7 @@ class ClothesBrandModelTest extends PHPUnit_Framework_TestCase {
 
     //This result going to work if you have the same clothing and brands in the database
     $expected =
-      "&lt;p&gt;totto&lt;/p&gt; <i>pants</i> tommy \' Hilfiger asd <i>coat</i> kasdj <b>totto</b> asdjasdjl <i>pants</i> <b>nike</b>";
+      "&lt;p&gt;totto&lt;/p&gt; <i>pants</i> tommy ' Hilfiger asd <i>coat</i> kasdj <b>totto</b> asdjasdjl <i>pants</i> <b>nike</b>";
 
     $this->assertContains($expected, $replaced);
   }

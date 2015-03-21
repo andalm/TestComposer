@@ -25,10 +25,10 @@ class ClothesBrandQuery extends BaseClothesBrandQuery
     if(!is_string($input))
       throw new Exception("The paramater must be a string.");
 
-    //Convert special characters to HTML entities and Quote string
-    $input = htmlspecialchars(addslashes($input));
-    $brands   = \BrandQuery::create()->orderByName()->find();
-    $clothing = \ClothesQuery::create()->orderByName()->find();
+    //Convert special characters to HTML entities
+    $input = htmlspecialchars($input);
+    $brands   = \BrandQuery::create()->orderByDescName();
+    $clothing = \ClothesQuery::create()->orderByDescName();
 
     //Replaced brands to <b>brand</b>
     foreach($brands as $brand)
