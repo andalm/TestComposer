@@ -2,61 +2,64 @@
 
 class JSon extends Response
 {
-    /**
-     *
-     * @var array data datos a codificar en formato JSon 
-     */
-    protected $data = array();
-    
-    /**
-     * 
-     * @param array $data datos a codificar
-     */
-    public function __construct($data = array())
+  /**
+   *
+   * @var array data all data to encode in json format
+   */
+  protected $data = array();
+
+  /**
+   *
+   * @param array $data datos a codificar
+   */
+  public function __construct($data = array())
+  {
+    $this->data = $data;
+  }
+
+  /**
+   *
+   * @return array get the data property
+   */
+  public function getData()
+  {
+    return $this->data;
+  }
+
+  /**
+   *
+   * @param array $data set the data property
+   */
+  public function setData($data = array())
+  {
+    if(is_array($data))
     {
-        $this->data = $data;
+      $this->data = $data;
     }
-    
-    /**
-     * 
-     * @return array obtener a datos a codificar
-     */
-    public function getData()
+    else
     {
-        return $this->data;
+      throw new Exception('Data received are not valid!');
     }
-    
-    /**
-     * 
-     * @param array $data setear datos a codificar
-     */
-    public function setData($data = array())
+  }
+
+  /**
+   *
+   * @return string all data encoded in json format
+   */
+  public function enconde()
+  {
+    return json_encode($this->data);
+  }
+
+  /**
+   * Implement the abstract method
+   */
+  public function execute()
+  {
+    //Maintaining clean the class scope
+    call_user_func(function ()
     {
-        if(is_array($data))
-        {
-            $this->data = $data;
-        }
-        else 
-        {
-            throw new Exception('Datos recibidos no validos!');
-        }
-       
-    }
-    
-    /**
-     * 
-     * @return string datos codificados en formato JSon
-     */
-    public function enconde()
-    {
-        return json_encode($this->data);
-    }
-    
-    /**
-     * Implementacion del metodo abstracto
-     */
-    public function execute()
-    {
-        echo $this->enconde();
-    }
+      echo $this->enconde();
+    });
+  }
 }

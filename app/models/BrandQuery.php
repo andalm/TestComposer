@@ -1,6 +1,7 @@
 <?php
 
 use Base\BrandQuery as BaseBrandQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'brand' table.
@@ -14,5 +15,13 @@ use Base\BrandQuery as BaseBrandQuery;
  */
 class BrandQuery extends BaseBrandQuery
 {
-
-} // BrandQuery
+  /**
+   * Return all records with count words in a name field
+   * @return ObjectCollection All records
+   */
+  public function orderByDescName(){
+    return $this->withColumn('(length(name)-length(replace(name," ",""))+1)', 'Count')
+      ->orderByCount('desc')
+      ->find();
+  }
+}
