@@ -14,7 +14,7 @@
             name"input"
             ng-model="search.input"
             placeholder="Search for..."
-            ng-keyup="search.searchWords(search.input)">
+            ng-keyup="search.getResults(search.input)">
         </div>
       </div>
     </div>
