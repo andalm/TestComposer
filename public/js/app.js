@@ -3,24 +3,42 @@
 
   var app = angular.module('TestComposer', ['ngSanitize']);
 
+  //Constants
+  app.constant('SEARCH_URL', '/test/searchAjax');
+
+  //Controllers
   app.controller('SearchController', SearchController);
 
-  SearchController.$inject = ['$http'];
+  SearchController.$inject = ['SearchService'];
 
-  function SearchController ($http) {
-    var vm = this;
-    vm.input = '';
-    vm.results = '';
-    //This code should be in a service, but for now I leave it here
-    vm.searchWords = function(input){
-      $http
-      .post('/test/searchAjax', {input:input})
-      .success(function(data, status, headers, config) {
-        vm.results = data;
+  function SearchController (SearchService) {
+    var sc = this;
+    sc.input = '';
+    sc.results = '';
+
+    sc.getResults = function(input){
+      SearchService
+      .getResults(input)
+      .then(function(results){
+        sc.results = results.data;
       })
-      .error(function(data, status, headers, config) {
-        alert('WTF! something wrong: '+ status +' :(');
+      .catch(function(error){
+        console.error(error);
       });
+    };
+  }
+
+  //Services
+  app.factory('SearchService', SearchService);
+
+  function SearchService($http, SEARCH_URL){
+
+    function getResults(input){
+      return $http.post(SEARCH_URL, {input: input});
+    }
+
+    return {
+      getResults: getResults
     };
   }
 })();
