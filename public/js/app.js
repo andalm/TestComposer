@@ -3,6 +3,9 @@
 
   var app = angular.module('TestComposer', ['ngSanitize']);
 
+  //Constants
+  app.constant('SEARCH_URL', '/test/searchAjax');
+
   //Controllers
   app.controller('SearchController', SearchController);
 
@@ -28,10 +31,10 @@
   //Services
   app.factory('SearchService', SearchService);
 
-  function SearchService($http){
+  function SearchService($http, SEARCH_URL){
 
     function getResults(input){
-      return $http.post('/test/searchAjax', {input: input});
+      return $http.post(SEARCH_URL, {input: input});
     }
 
     return {
