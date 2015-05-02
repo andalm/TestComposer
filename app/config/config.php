@@ -6,10 +6,10 @@ error_reporting(E_ALL);
 return [
   "database" => [
     "connection" => [
-      "host"      => "localhost",
-      "db"        => "test_composer",
-      "user"      => "root",
-      "password"  => "123",
+      "host"      => "sql5.freemysqlhosting.net",
+      "db"        => "sql575917",
+      "user"      => "sql575917",
+      "password"  => "jD4!rP3!",
       "adapter"   => "mysql"
     ]
   ]
