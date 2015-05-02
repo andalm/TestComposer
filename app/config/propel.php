@@ -7,9 +7,9 @@ return [
         'default' => [
           'adapter'    => 'mysql',
           'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
-          'dsn'        => 'mysql:host=localhost;dbname=test_composer',
-          'user'       => 'root',
-          'password'   => '123',
+          'dsn'        => 'mysql:host=sql5.freemysqlhosting.net;dbname=sql575917',
+          'user'       => 'sql575917',
+          'password'   => 'jD4!rP3!',
           'attributes' => []
         ]
       ]
