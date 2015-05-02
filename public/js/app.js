@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  var app = angular.module('TestComposer', ['ngSanitize']);
+  var app = angular.module('testComposer', ['ngSanitize']);
 
   //Constants
   app.constant('SEARCH_URL', '/test/searchAjax');
