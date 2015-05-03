@@ -27,15 +27,22 @@ class ClothesBrandQuery extends BaseClothesBrandQuery
 
     //Convert special characters to HTML entities
     $input = htmlspecialchars($input);
-    $brands   = \BrandQuery::create()->orderByDescName();
-    $clothing = \ClothesQuery::create()->orderByDescName();
+    $brands = \BrandQuery::create()
+      ->filterByNameScore($input)
+      ->orderByDescName()
+      ->find();
+
+    $clothing = \ClothesQuery::create()
+      ->filterByNameScore($input)
+      ->orderByDescName()
+      ->find();
 
     //Replaced brands to <b>brand</b>
     foreach($brands as $brand)
     {
       $input = preg_replace(
-        '/((?=^)|\s{1})('.$brand->getName().')((?=$)|\s{1})/i',
-        '$1<b>$2</b>$3',
+        '/('.$brand->getName().')/i',
+        '<b>$1</b>',
         $input
       );
     }
@@ -44,8 +51,8 @@ class ClothesBrandQuery extends BaseClothesBrandQuery
     foreach($clothing as $clothes)
     {
       $input = preg_replace(
-        '/((?=^)|\s{1})('.$clothes->getName().')((?=$)|\s{1})/i',
-        '$1<i>$2</i>$3',
+        '/('.$clothes->getName().')/i',
+        '<i>$1</i>',
         $input
       );
     }

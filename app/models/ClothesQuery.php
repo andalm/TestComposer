@@ -15,12 +15,20 @@ use Base\ClothesQuery as BaseClothesQuery;
 class ClothesQuery extends BaseClothesQuery
 {
   /**
+   * Return all records that match with parameter
+   * @return ObjectCollection All records
+   */
+  public function filterByNameScore($text) {
+    return $this
+      ->where('match('.$this->getModelAliasOrName().'.name) against("' . $text . '") > 0');
+  }
+
+  /**
    * Return all records with count words in a name field
    * @return ObjectCollection All records
    */
   public function orderByDescName(){
     return $this->withColumn('(length(name)-length(replace(name," ",""))+1)', 'Count')
-      ->orderByCount('desc')
-      ->find();
+      ->orderByCount('desc');
   }
 }
