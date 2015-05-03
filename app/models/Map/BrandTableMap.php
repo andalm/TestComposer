@@ -39,7 +39,7 @@ class BrandTableMap extends TableMap
     /**
      * The default database name for this class
      */
-    const DATABASE_NAME = 'sql575917';
+    const DATABASE_NAME = 'test_composer';
 
     /**
      * The table name for this class
